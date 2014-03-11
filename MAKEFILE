@@ -1,0 +1,24 @@
+CC=gcc -c -Zomf -Zsys -xc -funsigned-char -O2
+LINK=emxomfld -s
+LIBDIR= -LD:\emx\lib -LD:\emx\lib\st
+LIBS=  -lc_alias -lgcc -lc -lc_app -lsys -los2 -lmmpm2 -lend
+
+all     :  RAPlay.exe
+
+RAPlay.EXE: main.obj ra144.obj ra288.obj dart.obj RAPlay.def
+	$(LINK) -o RAPlay.EXE $(LIBDIR) $(LIBS) d:\emx\lib\crt0.obj main.obj ra144.obj ra288.obj dart.obj RAPlay.def
+
+clean:
+	del *.obj
+	del RAPlay.exe
+
+main.obj :    main.c
+	$(CC) main.c 
+ra144.obj :   ra144.c
+	$(CC) ra144.c 
+ra288.obj :   ra288.c
+	$(CC) ra288.c 
+dart.obj :    dart.c
+	$(CC) dart.c 
+
+
